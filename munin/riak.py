@@ -6,7 +6,7 @@ except ImportError:
     import simplejson as json
 import os
 import sys
-import urllib2
+import urllib.request, urllib.error, urllib.parse
 from munin import MuninPlugin
 
 class MuninRiakPlugin(MuninPlugin):
@@ -24,5 +24,5 @@ class MuninRiakPlugin(MuninPlugin):
         self.host = "%s:%s" % (host, port)
 
     def get_status(self):
-        res = urllib2.urlopen("http://%s/stats" % (self.host))
+        res = urllib.request.urlopen("http://%s/stats" % (self.host))
         return json.loads(res.read())
